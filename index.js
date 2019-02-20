@@ -56,4 +56,31 @@ async function getCourses() {
   console.log(courses);
 }
 
-getCourses();
+async function updateCourses(id) {
+  //Query first -- findById() -> modify its props --> save()
+  // const course = await Course.findById(id);
+  // if (!course) return;
+  // course.isPublished = true;
+  // course.author = "TML Another";
+  // const result = await course.save();
+  // console.log(result);
+  //Update first -- update directly -> Optionally: get the updated document
+
+  const result = await Course.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        author: "TML Ano",
+        isPublished: false
+      }
+    },
+    { new: true }
+  );
+  console.log(result);
+}
+
+async function removeCourse(id) {
+  const result = await Course.findByIdAndRemove(id);
+  console.log(result);
+}
+removeCourse("5c6bda2c352310043413c4b5");
